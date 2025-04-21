@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Cafe{% endblock %}
+
+{% block navigation %}{% include "nav_bar.html" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <br><br><br><br>
+  <h1 class="display-6">Add a new cafe into the database</h1>
+  <br>
+  <div class="row g-10 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="row">
+      <div class="col-12">
+        <br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <p style="color: red">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('add') }}" method="POST">
+          <div class="row">
+              <div class="col-12">
+                <p>Cafe name
+                    <input class="col-12" name="name" type="text" placeholder="Enter name of the cafe">
+                </p>
+                <p>Cafe map_url
+                    <input class="col-12" name="map_url" type="text" placeholder="Paste the map_url from Google Maps">
+                </p>
+                <p>Cafe img_url
+                    <input class="col-12" name="img_url" type="text" placeholder="Paste the img_url">
+                </p>
+                <p>Cafe location
+                    <input class="col-12" name="location" type="text" placeholder="Enter the address location">
+                </p>
+                <p>Cafe has Sockets
+                    <select class="form-select" name="has_sockets">
+                        <option value=1>✔</option>
+                        <option value=0>✘</option>
+                        </select>
+                </p>
+                <p>Cafe has Toilets
+                    <select class="form-select" name="has_toilet">
+                        <option value=1>✔</option>
+                        <option value=0>✘</option>
+                        </select>
+                </p>
+
+                <p>Cafe has WiFi
+                    <select class="form-select" name="has_wifi">
+                        <option value=1>✔</option>
+                        <option value=0>✘</option>
+                        </select>
+                </p>
+                <p>Cafe can take calls
+                    <select class="form-select" name="can_take_calls">
+                        <option value=1>✔</option>
+                        <option value=0>✘</option>
+                        </select>
+                </p>
+                <p>Number of Seats
+                    <input class="col-12" name="seats" type="text" placeholder="Enter the number of seats 0-10, 10-20 etc">
+                </p>
+                <p>Price for cup of Coffee
+                    <input class="col-12" name="coffee_price" type="text" placeholder="Enter the price, including currency symbol">
+                </p>
+                <br>
+              </div>
+              <div row>
+                <div col>
+                    <button class="btn btn-warning" type="submit">Submit</button>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

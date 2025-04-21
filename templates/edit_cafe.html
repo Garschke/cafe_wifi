@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Cafe{% endblock %}
+
+{% block navigation %}{% include "nav_bar.html" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br><br><br><br>
+    <h1 class="display-6">Edit Cafe: {{cafe.name}}</h1>
+    <br>
+    <div class="row g-10 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <form action="{{ url_for('edit') }}" method="POST">
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <input hidden="hidden" name="id" value="{{cafe.id}}">
+                    <p>Cafe name
+                        <input class="col-12" name="name" type="text" placeholder="map_url" value="{{cafe.name}}">
+                    </p>
+                    <p>Cafe map_url
+                        <input class="col-12" name="map_url" type="text" placeholder="map_url" value="{{cafe.map_url}}">
+                    </p>
+                    <p>Cafe img_url
+                        <input class="col-12" name="img_url" type="text" placeholder="img_url" value="{{cafe.img_url}}">
+                    </p>
+                    <p>Cafe location
+                        <input class="col-12" name="location" type="text" placeholder="location" value="{{cafe.location}}">
+                    </p>
+                    <p>Cafe has Sockets
+                        <select class="form-select" name="has_sockets" value="{{cafe.has_sockets}}">
+                            <option value=1>✔</option>
+                            <option value=0>✘</option>
+                            </select>
+                    </p>
+                    <p>Cafe has Toilets
+                        <select class="form-select" name="has_toilet" value="{{cafe.has_toilet}}">
+                            <option value=1>✔</option>
+                            <option value=0>✘</option>
+                            </select>
+                    </p>
+                    <p>Cafe has WiFi
+                        <select class="form-select" name="has_wifi" value="{{cafe.has_wifi}}">
+                            <option value=1>✔</option>
+                            <option value=0>✘</option>
+                            </select>
+                    </p>
+                    <p>Cafe can take calls
+                        <select class="form-select" name="can_take_calls" value="{{cafe.can_take_calls}}">
+                            <option value=1>✔</option>
+                            <option value=0>✘</option>
+                            </select>
+                    </p>
+                    <p>Number of Seats
+                        <input class="col-12" name="seats" type="text" placeholder="map_url" value="{{cafe.seats}}">
+                    </p>
+                    <p>Price for cup of Coffee
+                        <input class="col-12" name="coffee_price" type="text" placeholder="map_url" value="{{cafe.coffee_price}}">
+                    </p>
+                    <br>
+                </div>
+                <div row>
+                    <div col>
+                        <button class="btn btn-warning" type="submit">Change Details</button>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
