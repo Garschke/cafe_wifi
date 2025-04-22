@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# create the app
+# Create the app
 app = Flask(__name__)
 
 
@@ -18,7 +18,7 @@ class Base(DeclarativeBase):
     pass
 
 
-# configure the SQLite database, relative to the app instance folder
+# Configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URI')
 # Create the extension
 db = SQLAlchemy(model_class=Base)
@@ -76,7 +76,6 @@ def cafes():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == 'POST':
-        print(request.form)  # Debugging: Print form data
         new_cafe = Cafe(
             name=request.form["name"],
             map_url=request.form["map_url"],
