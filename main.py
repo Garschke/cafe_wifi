@@ -1,11 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
 from flask_bootstrap import Bootstrap5
-from flask_wtf import FlaskForm
-from wtforms import SelectField, StringField, SubmitField
-from wtforms.validators import DataRequired, url
+from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # create the app
 app = Flask(__name__)
@@ -17,13 +19,13 @@ class Base(DeclarativeBase):
 
 
 # configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cafes.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URI')
 # Create the extension
 db = SQLAlchemy(model_class=Base)
 # initialize the app with the extension
 db.init_app(app)
 # --------- BELOW ADDED FOR BOOTSTRAP 5 ---------
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap5(app)
 
 
@@ -47,33 +49,15 @@ with app.app_context():
     db.create_all()
 
 
-# ------------- FORM VALIDATION -------------
-class CafeForm(FlaskForm):
-    id = db.Column(db.Integer, primary_key=True)
-    name = StringField('Cafe name', validators=[DataRequired()])
-    map_url = StringField('Map URL', validators=[DataRequired(), url()])
-    img_url = StringField('Image URL', validators=[DataRequired(), url()])
-    location = StringField('Location', validators=[DataRequired()])
-    has_sockets = SelectField('Has sockets?',
-                              choices=[(1, '✔'), (0, '✘')],
-                              validators=[DataRequired()])
-    has_toilet = SelectField('Has toilet?',
-                             choices=[(1, '✔'), (0, '✘')],
-                             validators=[DataRequired()])
-    has_wifi = SelectField('Has wifi?',
-                           choices=[(1, '✔'), (0, '✘')],
-                           validators=[DataRequired()])
-    can_take_calls = SelectField('Can take calls?',
-                                 choices=[(1, '✔'), (0, '✘')],
-                                 validators=[DataRequired()])
-    seats = StringField('Seats', validators=[DataRequired()])
-    coffee_price = StringField('Coffee price', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+def current_year():
+    date = f"{datetime.now().strftime('%Y')}"
+    print(date)
+    return date
 
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("index.html", year=current_year())
 
 
 @app.route('/cafes')
@@ -86,29 +70,38 @@ def cafes():
         # Use .scalars() to get the elements rather than entire rows
         # from the database
         all_cafes = result.scalars().all()
-    return render_template("cafes.html", cafes=all_cafes)
+    return render_template("cafes.html", cafes=all_cafes, year=current_year())
 
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == 'POST':
-        print("True")
+        print(request.form)  # Debugging: Print form data
         new_cafe = Cafe(
             name=request.form["name"],
             map_url=request.form["map_url"],
             img_url=request.form["img_url"],
             location=request.form["location"],
-            has_sockets=bool(int(request.form["has_sockets"])),
-            has_toilet=bool(int(request.form["has_toilet"])),
-            has_wifi=bool(int(request.form["has_wifi"])),
-            can_take_calls=bool(int(request.form["can_take_calls"])),
+            has_sockets=bool(request.form["has_sockets"] == 'on'),
+            has_toilet=bool(request.form["has_toilet"] == 'on'),
+            has_wifi=bool(request.form["has_wifi"] == 'on'),
+            can_take_calls=bool(request.form["can_take_calls"] == 'on'),
             seats=request.form["seats"],
             coffee_price=request.form["coffee_price"]
         )
-        db.session.add(new_cafe)
-        db.session.commit()
-        return redirect(url_for('home'))
-    return render_template("add.html")
+        if Cafe.query.filter_by(name=new_cafe.name).first():
+            flash(f"{new_cafe.name} already exists, please try again!")
+            return render_template('add.html', year=current_year())
+        try:
+            with app.app_context():
+                db.session.add(new_cafe)
+                db.session.commit()
+                flash(f"{new_cafe.name} is added successfully!")
+                return redirect(url_for('home'))
+        except IntegrityError:
+            flash("Failed to add the new cafe. Please try again.")
+            return render_template('add.html', year=current_year())
+    return render_template('add.html', year=current_year())
 
 
 @app.route("/edit", methods=["GET", "POST"])
@@ -121,17 +114,22 @@ def edit():
         cafe_to_update.map_url = map_url=request.form["map_url"]
         cafe_to_update.img_url = img_url=request.form["img_url"]
         cafe_to_update.location = location=request.form["location"]
-        cafe_to_update.has_sockets = bool(int(request.form["has_sockets"]))
-        cafe_to_update.has_toilet = bool(int(request.form["has_toilet"]))
-        cafe_to_update.has_wifi = bool(int(request.form["has_wifi"]))
-        cafe_to_update.can_take_calls = bool(int(request.form["can_take_calls"]))
+        cafe_to_update.has_sockets = bool(
+            request.form["has_sockets"] == 'on')
+        cafe_to_update.has_toilet = bool(
+            request.form["has_toilet"] == 'on')
+        cafe_to_update.has_wifi = bool(
+            request.form["has_wifi"] == 'on')
+        cafe_to_update.can_take_calls = bool(
+            request.form["can_take_calls"] == 'on')
         cafe_to_update.seats = seats=request.form["seats"]
         cafe_to_update.coffee_price = coffee_price=request.form["coffee_price"]
         db.session.commit()
         return redirect(url_for('home'))
     cafe_id = request.args.get('id')
     cafe_selected = db.get_or_404(Cafe, cafe_id)
-    return render_template("edit_cafe.html", cafe=cafe_selected)
+    return render_template(
+        "edit_cafe.html", cafe=cafe_selected, year=current_year())
 
 
 @app.route("/delete")

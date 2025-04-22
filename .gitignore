@@ -199,3 +199,5 @@ pip-cache/
 **/.history
 
 # End of https://www.gitignore.io/api/visualstudiocode
+
+typings/flask_bootstrap/__init__.pyi

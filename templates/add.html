@@ -9,75 +9,87 @@
   <br><br><br><br>
   <h1 class="display-6">Add a new cafe into the database</h1>
   <br>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for message in messages %}
+      <p style="color: red">{{ message }}</p>
+      {% endfor %}
+  {% endif %}
+  {% endwith %}
   <div class="row g-10 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-    <div class="row">
-      <div class="col-12">
-        <br>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <p style="color: red">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-        <form action="{{ url_for('add') }}" method="POST">
-          <div class="row">
-              <div class="col-12">
-                <p>Cafe name
-                    <input class="col-12" name="name" type="text" placeholder="Enter name of the cafe">
-                </p>
-                <p>Cafe map_url
-                    <input class="col-12" name="map_url" type="text" placeholder="Paste the map_url from Google Maps">
-                </p>
-                <p>Cafe img_url
-                    <input class="col-12" name="img_url" type="text" placeholder="Paste the img_url">
-                </p>
-                <p>Cafe location
-                    <input class="col-12" name="location" type="text" placeholder="Enter the address location">
-                </p>
-                <p>Cafe has Sockets
-                    <select class="form-select" name="has_sockets">
-                        <option value=1>✔</option>
-                        <option value=0>✘</option>
-                        </select>
-                </p>
-                <p>Cafe has Toilets
-                    <select class="form-select" name="has_toilet">
-                        <option value=1>✔</option>
-                        <option value=0>✘</option>
-                        </select>
-                </p>
-
-                <p>Cafe has WiFi
-                    <select class="form-select" name="has_wifi">
-                        <option value=1>✔</option>
-                        <option value=0>✘</option>
-                        </select>
-                </p>
-                <p>Cafe can take calls
-                    <select class="form-select" name="can_take_calls">
-                        <option value=1>✔</option>
-                        <option value=0>✘</option>
-                        </select>
-                </p>
-                <p>Number of Seats
-                    <input class="col-12" name="seats" type="text" placeholder="Enter the number of seats 0-10, 10-20 etc">
-                </p>
-                <p>Price for cup of Coffee
-                    <input class="col-12" name="coffee_price" type="text" placeholder="Enter the price, including currency symbol">
-                </p>
-                <br>
+      <form action="{{ url_for('add') }}" method="POST">
+          <br>
+          <div class="mb-3">
+              <label for="name" class="form-label">Cafe Name</label>
+              <input type="text" class="form-control" name="name" value="" placeholder="Enter name of the cafe" required>
+              <div class="valid-feedback">
+                Looks good!
               </div>
-              <div row>
-                <div col>
-                    <button class="btn btn-warning" type="submit">Submit</button>
-                </div>
-                <br>
-              </div>
-            </div>
           </div>
+          <div class="mb-3">
+              <label for="map_url" class="form-label">Cafe Map URL</label>
+              <input type="url" class="form-control" name="map_url" value="" placeholder="Paste the map_url from Google Maps" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="img_url" class="form-label">Cafe Image URL</label>
+              <input type="url" class="form-control" name="img_url" value="" placeholder="Paste an image URL for the cafe" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="location" class="form-label">Cafe Location</label>
+              <input type="text" class="form-control" name="location" value="" placeholder="Enter the address for the cafe location" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+          </div>
+          <br>
+          <div class="row">
+              <div class="col-md-3">
+                  <input type="checkbox" class="form-check-input" name="has_toilet"
+                  style="background-color: #35312b !important; border-color: white;">
+                  <label class="form-check-label" for="has_toilets">Cafe has Toilets</label>
+              </div>
+              <div class="col-md-3">
+                  <input type="checkbox" class="form-check-input" name="has_wifi"
+                  style="background-color: #35312b !important; border-color: white;">
+                  <label class="form-check-label" for="has_wifi">Cafe has Wifi</label>
+              </div>
+              <div class="col-md-3">
+                  <input type="checkbox" class="form-check-input"  name="has_sockets"
+                  style="background-color: #35312b !important; border-color: white;">
+                  <label class="form-check-label" for="has_sockets" >Cafe has Sockets</label>
+              </div>
+              <div class="col-md-3">
+                  <input type="checkbox" class="form-check-input" name="can_take_calls"
+                  style="background-color: #35312b !important; border-color: white;">
+                  <label class="form-check-label" for="has_sockets">Can take Calls</label>
+              </div>
+          </div>
+          <br>
+          <div class="mb-3">
+              <label for="seats" class="form-label">Number of Seats</label>
+              <input type="text" class="form-control" name="seats" value="" placeholder="Enter number of seats 0, 1-10, 11-20 etc." required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="coffee_price" class="form-label">Price of a cup of Coffee</label>
+              <input type="text" class="form-control" name="coffee_price" value="" placeholder="Enter the price, including currency symbol" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-warning">Submit</button>
+          <br>
+          <br>
       </form>
-    </div>
   </div>
 </div>
 {% endblock %}
