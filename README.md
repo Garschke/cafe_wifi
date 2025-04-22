@@ -1,7 +1,7 @@
 <img src="static/images/favicon.ico" width="50px" alt="app icon coffee bean">
 
 # cafe_wifi
-Website that lists cafes with wifi and power for remote working. Using Python with Flask, SQLAlchemy and Bootstrap 5.3 to create simple responsive website connected to a small SQLite DB. Utalizing custom CSS and inline CSS to add additional control of a coffee inspired color pallet.
+Website that lists cafes with wifi and power for remote working. Using Python with Flask, SQLAlchemy and Bootstrap 5.3 to create simple responsive website connected to a small SQLite DB. Utalizing custom external CSS and inline CSS to add additional control of a coffee inspired color pallet.
 
 The website landing page is designed to highlight Brand identity and purpose. Little details like a custom coffee bean favicon, custom fonts and color pallet, provide an introduction to the consistent design feel and look, which is carried on throughout the site.
 
