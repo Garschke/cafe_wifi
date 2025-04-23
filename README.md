@@ -18,7 +18,7 @@ The Navigartion bar 'Add Cafe' link and 'Edit Cafe' button, take you to dedicate
 
 <img src="static/images/edit.png" style="width=450px; height=600px">
 
-The forms on both of these pages, use client side validation, to ensure that details are filled in, and are of the correct type, whether that is text or URLs, before they can be submitted. Check boxes are used to gather info on if the cafe has Toilets, Wifi, Power Sockets and if you can Take Calls. These checkes use inline CSS to override the regular and Bootstrap formatting to keep a consistant color pallet.  If fields are missed or incorrect input tyopes are used, the feedback is provided.
+The forms on both of these pages, use client side validation, to ensure that details are filled in, and are of the correct type, whether that is text or URLs, before they can be submitted. Check boxes are used to gather info on if the cafe has Toilets, Wifi, Power Sockets and if you can Take Calls. These check boxes use inline CSS to override the regular and Bootstrap formatting to keep a consistant color pallet.  If fields are missed or incorrect input types are used, the feedback is provided.
 
 <img src="static/images/add.png" style="width=450px; height=600px">
 
