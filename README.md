@@ -36,10 +36,10 @@ In addition to the fields needing to be filled in, there are two URL fields, for
 ## Features
 
 - Bootstrap 5.3 used to deliver consistant responsive cross browser rendering of the pages.
-- Custom CSS (external and inline) used to adjust out of th ebox color pallet.
-- Fask used to build and remder pages from Python and inject the current year's date into the copyright at bottom of the page.
+- Custom CSS (external and inline) used to adjust out of the box color pallet.
+- Flask used to build and remder pages from Python and inject the current year's date into the copyright at bottom of the page.
 - Client side Data Validation in the HTML form pages.
-- Custom monochromatic coffee inspired color pallet.
+- Custom coffee inspired color pallet.
   - #454038
   - #825F27
   - #69311F
@@ -53,3 +53,6 @@ In addition to the fields needing to be filled in, there are two URL fields, for
 - DB validation to ensure duplicate Cafes are not aded to the databse with test for unique Cafe Name.
 <br><br>
 <img src="static/images/duplicate_cafe_name.png" style="width=450px; height=600px">
+
+<img src="static/images/clor_wheel.png" style="width=450px; height=600px">
+
