@@ -54,5 +54,5 @@ In addition to the fields needing to be filled in, there are two URL fields, for
 <br><br>
 <img src="static/images/duplicate_cafe_name.png" style="width=450px; height=600px">
 
-<img src="static/images/clor_wheel.png" style="width=450px; height=600px">
+<img src="static/images/color_wheel.png" style="width=450px; height=600px">
 
