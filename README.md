@@ -37,7 +37,7 @@ In addition to the fields needing to be filled in, there are two URL fields, for
 
 - Bootstrap 5.3 used to deliver consistant responsive cross browser rendering of the pages.
 - Custom CSS (external and inline) used to adjust out of the box color pallet.
-- Flask used to build and remder pages from Python and inject the current year's date into the copyright at bottom of the page.
+- Flask used to build and render pages from Python and inject the current year's date into the copyright at bottom of the page.
 - Client side Data Validation in the HTML form pages.
 - Custom coffee inspired color pallet.
   - #454038
@@ -46,7 +46,7 @@ In addition to the fields needing to be filled in, there are two URL fields, for
   - #573A0C
   - #FFC107
   - #FFFFFF
-
+<br>
   <img src="static/images/color_pallet.png" width="250px">
 <br>
 
