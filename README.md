@@ -9,7 +9,7 @@ The website landing page is designed to highlight Brand identity and purpose. Sm
 
 The link on the lading page takes you to the main 'Cafes' page, listing the cafes, each cafe in it's own section.  Using custom fonts, from font-awesome, for icons, the amenities at each cafe can clearly be seen, from Wifi, Sockets and Seats through to if the cafe has toilets available for customer.<br>
 Navigating the site is via the Navigation Bar at the top of the screen; again tying back to the brand identity, with a small coffee cup logo from the landing page repeated at the right of the bar, and consistant fonts and color pallet.<br>
-The three links in the navigation bar are for: the landing page, the cafes page and add-cafe pages.<br>For cafe specific links there are: Edit Cafe, Delete (cafe), and Map; these details buttons are in the individual cafe sections.  The Map button opens a new browser tab containing the linked Google Maps page, 
+The three links in the navigation bar are for: the landing page, the cafes page and add-cafe pages.<br>For cafe specific links there are: Edit Cafe, Delete (cafe), and Maps; these details buttons are in the individual cafe sections.  The 'Maps' button opens a new browser tab containing the linked Google Maps page, 
 
 <img src="static/images/cafes.png"  style="width=450px; height=600px">
 
